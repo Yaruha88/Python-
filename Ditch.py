@@ -24,23 +24,25 @@ storage = [
     'count': 1
 }
 ]
-for i in storage:
-    print(('Название: ') + (i['name']), str('в количестве '), + (i['count']), str('шт'))
-goods = ['Вилка', 'Ложка', 'Нож'] 
-bin = input('Что выбираешь? ') 
-comment = ['отличный выбор', 'тоже неплохо', 'ну как знаешь']
-index = goods.index(bin) 
-print(comment[index])
-q = int(input('Какое количество берешь? '))
-for i in storage:
-    if i['name'] == bin:
-        if q <= i['count']:
-            i['count'] = i['count'] - q
-            print(('Ты выбрал ') + (bin) + str(' в количестве ') + str(q) + str(' шт! ') + str('Осталось на складе '), + (i['count']), str('шт'))
-        else:
-            print('Слишком дохера, нет столько!')
-for i in storage:
-    print(('Осталось: ') + (i['name']), str('в количестве '), + (i['count']), str('шт'))
+def printStock():
+    for i in storage: 
+        print(('Название: ') + (i['name']), str('в количестве '), + (i['count']), str('шт')) 
+printStock()
+goods = ['Вилка', 'Ложка', 'Нож']  
+bin = input('Что выбираешь? ')  
+comment = ['отличный выбор', 'тоже неплохо', 'ну как знаешь'] 
+index = goods.index(bin)  
+print(comment[index]) 
+q = int(input('Какое количество берешь? ')) 
+for i in storage: 
+    if i['name'] == bin: 
+        if q <= i['count']: 
+            i['count'] = i['count'] - q 
+            print(('Ты выбрал ') + (bin) + str(' в количестве ') + str(q) + str(' шт! ') + str('Осталось на складе '), + (i['count']), str('шт')) 
+        else: 
+            print('Слишком дохера, нет столько!') 
+
+printStock()
 
 
  # if i['color'] == 'Красный':
