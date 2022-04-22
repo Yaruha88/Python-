@@ -24,10 +24,10 @@ storage = [
     'count': 1
 }
 ]
-def printStock():
+def printStock(storage):
     for i in storage: 
         print(('Название: ') + (i['name']), str('в количестве '), + (i['count']), str('шт')) 
-printStock()
+printStock(storage)
 goods = ['Вилка', 'Ложка', 'Нож']  
 bin = input('Что выбираешь? ')  
 comment = ['отличный выбор', 'тоже неплохо', 'ну как знаешь'] 
@@ -42,7 +42,7 @@ for i in storage:
         else: 
             print('Слишком дохера, нет столько!') 
 
-printStock()
+printStock(storage)
 
 
  # if i['color'] == 'Красный':
