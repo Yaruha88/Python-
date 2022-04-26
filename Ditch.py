@@ -1,9 +1,11 @@
-print('У нас есть что-то для тебя! Выбирай: ') 
+import Greetings
+import Storage
+from Storage import storage
+import Helpers
 
-printStock(storage)
 purchases = input('Что выбираешь? ')  
 quantity = int(input('Какое количество берешь? ')) 
-for i in storage: 
+for i in Storage.storage: 
     if i['name'] == purchases: 
         if quantity <= i['count']: 
             i['count'] = i['count'] - quantity 
@@ -11,6 +13,6 @@ for i in storage:
         else: 
             print('Слишком дохера, нет столько!') 
 
-printStock(storage)
+Helpers.printStock(storage)
 
 
