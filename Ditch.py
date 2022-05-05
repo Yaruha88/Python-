@@ -11,9 +11,11 @@ quantity = int(input('Какое количество берешь? '))
 def buy_request(x, y, z):
     for i in x: 
         if i['name'] == y and i['count'] >= z:
-            return ('Есть такое')
+            print('Есть такое')
+            return True
         continue
-    return ('Нет такого')
+    print('Нет такого')
+    return False
 
 # Helpers.printStock(Storage.storage)
 otvet = buy_request(Storage.storage, purchases, quantity)
@@ -40,16 +42,22 @@ def deleteItem():
     MyShoppingCart.shoppingCart.clear()
     print('Корзина очищена ')
 
-def bying():
-    viewCart()
+def ordering():
+    isOrdering = True
+    while isOrdering == True:
+        zakaz = input('Заказ оформлен. Хочешь заказать еще? да\нет: ')
+        if zakaz == 'да':
+            print(Helpers.printStock(Storage.storage))
+        else:
+            isOrdering = False
+        print('До скорого')
 
 if pipka == '1':
     viewCart()
 elif pipka == '2':
     deleteItem()
 elif pipka == '3':
-    bying()
+    ordering()
 else:
     print('До скорого')
-
 
