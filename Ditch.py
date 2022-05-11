@@ -2,6 +2,7 @@ import Greetings
 import Storage
 import Helpers
 import MyShoppingCart
+# коммент
 
 def viewStorage():
     Helpers.printStock(Storage.storage)
