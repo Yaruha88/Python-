@@ -1,14 +1,8 @@
-import Helpers
-import Storage
-
-
 shoppingCart = []
 
-def viewStorage():
-    Helpers.printStock(Storage.storage)
-
 def viewCart():
-    print('Вот твоя корзина: ' + str(shoppingCart))
+    for i in shoppingCart: 
+        print('Вот твоя корзина: ' + str(i))
 
 def deleteItem():
     shoppingCart.clear()
