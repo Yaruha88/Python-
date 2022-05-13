@@ -1,9 +1,10 @@
+from Helpers import printStock
+
 shoppingCart = []
 
-def viewCart():
-    for i in shoppingCart: 
-        print('Вот твоя корзина: ' + str(i))
-
+def viewCart(shoppingCart):
+    printStock(shoppingCart)
+    
 def deleteItem():
     shoppingCart.clear()
     print('Корзина очищена ')
