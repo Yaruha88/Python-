@@ -1,9 +1,9 @@
 import Greetings
-import Storage
 import Helpers
+import Storage
 from MyShoppingCart import viewCart
-from MyShoppingCart import viewStorage
 from MyShoppingCart import deleteItem
+from Storage import viewStorage
 
 def ordering():
     Helpers.printStock(Storage.storage)
@@ -42,4 +42,3 @@ elif user_choise == '4':
     ordering()
 else:
     print('До скорого')
-
