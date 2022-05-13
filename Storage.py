@@ -3,6 +3,15 @@ import Helpers
 def viewStorage():
     Helpers.printStock(storage)
 
+def checkInStorage(x, y, z):
+    for i in x: 
+        if i['name'] == y and i['count'] >= z:
+            print('Есть такое')
+            return True
+        continue
+    print('Нет такого')
+    return False
+
 storage = [
 {
     'name': 'Вилка',
