@@ -1,3 +1,8 @@
+import Helpers
+
+def viewStorage():
+    Helpers.printStock(storage)
+
 storage = [
 {
     'name': 'Вилка',
