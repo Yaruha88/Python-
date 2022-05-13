@@ -1,24 +1,9 @@
-from os import name
 import Greetings
 import Storage
 import Helpers
-import MyShoppingCart
-
-
-
-def viewStorage():
-    Helpers.printStock(Storage.storage)
-
-def viewCart():
-    print('Вот твоя корзина: ' + str(MyShoppingCart.shoppingCart))
-
-def deleteItem():
-    MyShoppingCart.shoppingCart.clear()
-    print('Корзина очищена ')
-
-def addItems(purchases):
-    MyShoppingCart.shoppingCart.append(purchases)
-    print(purchases + ' добавлен в корзину.')
+from MyShoppingCart import viewCart
+from MyShoppingCart import viewStorage
+from MyShoppingCart import deleteItem
 
 def ordering():
     Helpers.printStock(Storage.storage)
