@@ -1,12 +1,10 @@
 import Greetings
 import Helpers
 import Storage
-from MyShoppingCart import viewCart
-from MyShoppingCart import deleteItem
-from Storage import viewStorage
+
 
 def ordering():
-    Helpers.printStock(Storage.storage)
+    printStock()
     purchases = input('Что выбираешь? ')
     quantity = int(input('Какое количество берешь? ')) 
     otvet = checkInStorage(Storage.storage, purchases, quantity)
@@ -21,24 +19,36 @@ def ordering():
             isOrdering = False
         print('До скорого')
     
-def checkInStorage(x, y, z):
-    for i in x: 
-        if i['name'] == y and i['count'] >= z:
-            print('Есть такое')
-            return True
-        continue
-    print('Нет такого')
-    return False
-
 user_choise = Greetings.greet()
 
 if user_choise == '1':
-    viewStorage()
+    viewStorage(Storage)
 elif user_choise == '2':
-    viewCart()
+    viewCart(MyShoppingCart)
 elif user_choise == '3':
     deleteItem()
 elif user_choise == '4':
     ordering()
 else:
     print('До скорого')
+
+
+# def order():
+#     purchases = input('Что выбираешь? ')
+#     quantity = int(input('Какое количество берешь? ')) 
+#     otvet = checkInStorage(Storage.storage, purchases, quantity)
+#     print(otvet)
+
+#     print(('Ты выбрал ') + (purchases) + str(' в количестве ') + str(quantity) + str(' шт! '))
+#     addToShoppingCart = input('Кладём в корзину? да\нет: ')
+
+#     if addToShoppingCart == 'да':
+#         addItems()
+#     else:
+#         print('Ну как хочешь.')
+#         Greetings.sayHello(name)
+#     return purchases
+
+
+
+
