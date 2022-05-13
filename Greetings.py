@@ -1,5 +1,8 @@
-def main(name):
+def sayHello(name):
     print('Привет ' + str(name) + '. Добро пожаловать в магазин! \n 1. Посмотреть товар \n 2. Посмотреть корзину \n 3. Удалить товар из корзины \n 4. Оформить заказ')
-name = input('Как тебя зовут? ')
-main(name)
-pipka = input('Выбери действие: ')
+
+def greet():
+    name = input('Как тебя зовут? ')
+    sayHello(name)
+    pipka = input('Выбери действие: ')
+    return pipka
