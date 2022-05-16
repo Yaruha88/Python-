@@ -2,7 +2,7 @@ from Helpers import printStock
 
 shoppingCart = []
 
-def viewCart(shoppingCart):
+def viewCart():
     printStock(shoppingCart)
     
 def deleteItem():
