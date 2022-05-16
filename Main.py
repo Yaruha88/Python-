@@ -1,13 +1,15 @@
 import Greetings
 import Helpers
+from MyShoppingCart import deleteItem
+from MyShoppingCart import viewCart
 import Storage
 
 
 def ordering():
-    printStock()
+    Helpers.printStock(Storage.storage)
     purchases = input('Что выбираешь? ')
     quantity = int(input('Какое количество берешь? ')) 
-    otvet = checkInStorage(Storage.storage, purchases, quantity)
+    otvet = Storage.checkInStorage(Storage.storage, purchases, quantity)
     print(otvet)
     
     isOrdering = True
@@ -22,9 +24,9 @@ def ordering():
 user_choise = Greetings.greet()
 
 if user_choise == '1':
-    viewStorage(Storage)
+    Storage.viewStorage()
 elif user_choise == '2':
-    viewCart(MyShoppingCart)
+    viewCart()
 elif user_choise == '3':
     deleteItem()
 elif user_choise == '4':
