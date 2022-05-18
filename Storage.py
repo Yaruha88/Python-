@@ -4,7 +4,7 @@ import Helpers
 def changeInStorage(storage, name_item, count):
     for i in storage: 
         if i['name'] == name_item and i['count'] >= count:
-            i['count'] = ['count'] - int(quantity)
+            i['count'] = i['count'] - count
             print('Количество изменено')
             return True
         continue

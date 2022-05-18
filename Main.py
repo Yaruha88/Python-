@@ -1,7 +1,6 @@
 import Greetings
 import Helpers
-from MyShoppingCart import deleteItem
-from MyShoppingCart import viewCart
+from MyShoppingCart import deleteItem, viewCart
 import Storage
 
 
