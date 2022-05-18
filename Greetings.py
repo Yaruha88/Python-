@@ -5,4 +5,8 @@ def greet():
     name = input('Как тебя зовут? ')
     sayHello(name)
     pipka = input('Выбери действие: ')
+<<<<<<< HEAD
     return pipka
+=======
+    return pipka
+>>>>>>> 27efb3c6f68c5315f6ad54a206bb901bffa5829a
