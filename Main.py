@@ -1,3 +1,23 @@
+from MyShoppingCart import deleteItem, viewCart
+import Storage
+
+
+def ordering():
+    Storage.viewStorage()
+    while True:
+        purchases = input('Что выбираешь? ')
+        quantity = int(input('Какое количество берешь? '))
+        if Storage.checkOrder(Storage.storage, purchases, quantity):
+            Storage.changeInStorage(Storage.storage, purchases, quantity)
+            continueOrdering = input('Заказ оформлен. Хочешь заказать еще? да\нет: ')
+        
+        if continueOrdering != 'да':
+            break
+
+ordering()
+
+
+
 import Greetings
 import Helpers
 from MyShoppingCart import deleteItem, viewCart
