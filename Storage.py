@@ -1,6 +1,5 @@
 import Helpers
 
-
 def changeInStorage(storage, name_item, count):
     for i in storage: 
         if i['name'] == name_item and i['count'] >= count:
@@ -13,6 +12,7 @@ def changeInStorage(storage, name_item, count):
 
 def viewStorage():
     Helpers.printStock(storage)
+    
 
 def checkOrder(check, name_item, count):
     for i in check: 
