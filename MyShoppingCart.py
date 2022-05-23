@@ -3,7 +3,12 @@ from Helpers import printStock
 shoppingCart = []
 
 def viewCart():
-    printStock(shoppingCart)
+    if len(shoppingCart) == 0:
+        print('Корзина пустая')
+    else:
+        print('В корзине: ')
+        printStock(shoppingCart)
+    
     
 def deleteItem():
     shoppingCart.clear()
@@ -11,4 +16,4 @@ def deleteItem():
 
 def addItems(purchases):
     shoppingCart.append(purchases)
-    print(purchases + ' добавлен в корзину.')
+    print(purchases['name'] + ' добавлен в корзину.') 
