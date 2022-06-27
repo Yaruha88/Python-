@@ -1,4 +1,4 @@
-from Helpers import printStock
+from Helpers import printStock, changeInStorage, checkInStorage
 
 shoppingCart = []
 
@@ -14,6 +14,11 @@ def deleteItem():
     shoppingCart.clear()
     print('Корзина очищена ')
 
-def addItems(purchases):
-    shoppingCart.append(purchases)
-    print(purchases['name'] + ' добавлен в корзину.') 
+def addItems(product):
+    exist = checkInStorage(shoppingCart, product['name'])
+    if exist:
+        changeInStorage(shoppingCart, product['name'], product['count'])
+    else:
+        shoppingCart.append(product)
+    print(product['name'] + ' добавлен в корзину.') 
+
