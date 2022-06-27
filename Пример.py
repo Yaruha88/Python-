@@ -45,6 +45,27 @@ for i in storage:
 printStock(storage)
 
 
+# Helpers.printStock(Storage.storage)
+
+# purchases = input('Что выбираешь? ')
+# # choose_color =  input('Какой цвет? ')
+# quantity = int(input('Какое количество берешь? ')) 
+
+# def buy_request(x, y, z):
+#     for i in x: 
+#         if i['name'] == y and i['count'] >= z:
+#             return True
+#         else:
+#             return False
+
+
+# otvet = buy_request(Storage.storage, purchases, quantity)
+# print(otvet)
+
+
+
+
+
  # if i['color'] == 'Красный':
     #     i['count'] = 25
 
