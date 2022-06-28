@@ -49,18 +49,23 @@ def handle_text(message):
         MyShoppingCart.shoppingCart.clear()
         bot.send_message(message.chat.id, 'Корзина очищена ')
     elif message.text.strip() == '4. Оформить заказ':
-        Storage.viewStorage()
-        purchases = ('Что выбираешь? ')
-        bot.send_message(message.chat.id, purchases)
-        quantity = ('Какое количество берешь? ')
-        bot.send_message(message.chat.id, quantity)
-        if Storage.checkOrder(Storage.storage, purchases, quantity):
-            Storage.changeInStorage(Storage.storage, purchases, quantity)
-            addItems({'name':purchases, 'count':quantity})
-            continueOrdering = ('Заказ оформлен. Хочешь заказать еще? да\нет: ')
-            bot.send_message(message.chat.id, continueOrdering)
-        if message.text.strip() == 'нет':
-            bot.send_message(message.chat.id, 'До свидания')
+        for i in Storage.storage: 
+            answer = ('Название: ') + (i['name']), str('в количестве '), + (i['count']), str('шт')
+            bot.send_message(message.chat.id, answer) 
+        bot.send_message(message.chat.id, 'Что выбираешь? ')
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
+    bot.send_message(message.chat.id, 'Ты выбрал?' + message.text)
+
+        # quantity = ('Какое количество берешь? ')
+        # bot.send_message(message.chat.id, quantity)
+        # if Storage.checkOrder(Storage.storage, purchases, quantity):
+        #     Storage.changeInStorage(Storage.storage, purchases, quantity)
+        #     addItems({'name':purchases, 'count':quantity})
+        #     continueOrdering = ('Заказ оформлен. Хочешь заказать еще? да\нет: ')
+        #     bot.send_message(message.chat.id, continueOrdering)
+        # if message.text.strip() == 'нет':
+        #     bot.send_message(message.chat.id, 'До свидания')
 
         
         
