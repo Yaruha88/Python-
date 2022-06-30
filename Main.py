@@ -5,6 +5,8 @@ import Helpers
 from MyShoppingCart import deleteItem, viewCart, addItems
 import Storage
 import MyShoppingCart
+ODERING = ''
+CART = {}
 
 bot = telebot.TeleBot('5202629983:AAHB0cUjCLqJEz8rWs7I-_WHWGLkdYniAX8')
 @bot.message_handler(commands=['start'])
@@ -53,9 +55,22 @@ def handle_text(message):
             answer = ('Название: ') + (i['name']), str('в количестве '), + (i['count']), str('шт')
             bot.send_message(message.chat.id, answer) 
         bot.send_message(message.chat.id, 'Что выбираешь? ')
-@bot.message_handler(content_types=['text'])
-def handle_text(message):
-    bot.send_message(message.chat.id, 'Ты выбрал?' + message.text)
+        global ODERING
+        ODERING = 'name'
+        global CART
+        CART = {'name', 'count'}
+        ODERING == 'name'
+        CART['name'] = message.text.strip()
+        bot.send_message(message.chat.id, 'Введи количество')
+        ODERING = 'count'
+    elif ODERING == 'count':
+        CART['count'] = message.text.strip()
+        ODERING = False
+        bot.send_message(message.chat.id, CART)
+        
+# @bot.message_handler(content_types=['text'])
+# def handle_text(message):
+#     bot.send_message(message.chat.id, 'Ты выбрал?' + message.text)
 
         # quantity = ('Какое количество берешь? ')
         # bot.send_message(message.chat.id, quantity)
