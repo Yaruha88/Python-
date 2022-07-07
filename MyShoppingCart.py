@@ -2,6 +2,9 @@ from Helpers import printStock, changeInStorage, checkInStorage
 
 shoppingCart = []
 
+def getCart():
+    return shoppingCart
+
 def viewCart():
     if len(shoppingCart) == 0:
         print('Корзина пустая')

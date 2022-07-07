@@ -30,12 +30,14 @@ def handle_text(message):
 
     if message.text.strip() == '1. Посмотреть товар':
         for i in Storage.storage: 
-            answer = ('Название: ') + (i['name']) + str(' в количестве ') + (i['count']) + str(' шт')
+            answer = ('Название: ') + (i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
             bot.send_message(message.chat.id, answer) 
     elif message.text.strip() == '2. Посмотреть корзину':
-        cart = MyShoppingCart.viewCart()
-        for i in cart: 
-            answer = ('Название: ') + (i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
+        cart = MyShoppingCart.getCart()
+        if len(cart) == 0:
+            bot.send_message(message.chat.id, 'Корзина пустая')
+        for i in cart:
+            answer = str('Название: ') + str(i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
             bot.send_message(message.chat.id, answer) 
     elif message.text.strip() == '3. Удалить товар из корзины':
         MyShoppingCart.shoppingCart.clear()
@@ -47,17 +49,15 @@ def handle_text(message):
         bot.send_message(message.chat.id, 'Что выбираешь? ')
         ODERING = 'name'
     elif ODERING == 'name':
-        Check = Helpers.checkInStorage(ODERING['check'], ODERING['name_item'])
-        if Check == True:
-            answer = ('Отлично!')
-            bot.send_message(message.chat.id, answer)
-        else:
-            answer = ('Неверно введено название товара. Введи название правильно.')
-            bot.send_message(message.chat.id, answer)
         # написать функцию проверки имени типа как в Storage и вывести сюда как в переменной Change
         PRODUCT['name'] = message.text.strip()
-        bot.send_message(message.chat.id, 'Введи количество')
-        ODERING = 'count'
+        Check = Helpers.checkInStorage(Storage.storage, PRODUCT['name'])
+        if Check == True: 
+            PRODUCT['name'] = message.text.strip()
+            bot.send_message(message.chat.id, 'Введи количество')
+            ODERING = 'count'
+        else:
+            bot.send_message(message.chat.id, 'Такого нет. Введи название еще раз')
     elif ODERING == 'count':
         PRODUCT['count'] = int(message.text.strip())
         MyShoppingCart.addItems(copy.copy(PRODUCT))
