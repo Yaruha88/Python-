@@ -89,3 +89,55 @@ printStock(storage)
 # number = int(input('Выбери количество: '))
 # if number in storage > 10:
 #     print('Слишком дохера, нет столько! ')
+
+
+# def order():
+#     purchases = input('Что выбираешь? ')
+#     quantity = int(input('Какое количество берешь? ')) 
+#     otvet = checkInStorage(Storage.storage, purchases, quantity)
+#     print(otvet)
+
+#     print(('Ты выбрал ') + (purchases) + str(' в количестве ') + str(quantity) + str(' шт! '))
+#     addToShoppingCart = input('Кладём в корзину? да\нет: ')
+
+#     if addToShoppingCart == 'да':
+#         addItems()
+#     else:
+#         print('Ну как хочешь.')
+#         Greetings.sayHello(name)
+#     return purchases
+        
+        
+
+
+# def ordering():
+#     Storage.viewStorage()
+#     while True:
+#         purchases = input('Что выбираешь? ')
+#         quantity = int(input('Какое количество берешь? '))
+#         if Storage.checkOrder(Storage.storage, purchases, quantity):
+#             Storage.changeInStorage(Storage.storage, purchases, quantity)
+#             addItems({'name':purchases, 'count':quantity})
+#             continueOrdering = input('Заказ оформлен. Хочешь заказать еще? да\нет: ')
+        
+#         if continueOrdering != 'да':
+#             break
+
+# def mainMenu():
+#     while True:
+#         user_choise = Greetings.greet()
+#         if user_choise == '1':
+#             Storage.viewStorage()
+#         elif user_choise == '2':
+#             viewCart()
+#         elif user_choise == '3':
+#             deleteItem()
+#         elif user_choise == '4':
+#             ordering()
+#         else:
+#             print('До скорого')
+
+# name = input('Как тебя зовут? ')
+# Greetings.sayHello(name)
+# mainMenu()
+
