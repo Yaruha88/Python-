@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 from telebot import types
 import telebot
 import Helpers
 import Storage
 import MyShoppingCart
 import copy
-ODERING = ''
-PRODUCT = dict()
+Ordering = ''
+Items = dict()
 
 bot = telebot.TeleBot('5202629983:AAHB0cUjCLqJEz8rWs7I-_WHWGLkdYniAX8')
 @bot.message_handler(commands=['start'])
@@ -24,8 +23,8 @@ def start_message(message):
 
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
-    global ODERING
-    global PRODUCT
+    global Ordering
+    global Items
 
     if message.text.strip() == '1. Посмотреть товар':
         for i in Storage.storage: 
@@ -46,25 +45,25 @@ def handle_text(message):
             answer = ('Название: ') + (i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
             bot.send_message(message.chat.id, answer) 
         bot.send_message(message.chat.id, 'Что выбираешь? ')
-        ODERING = 'name'
-    elif ODERING == 'name':
+        Ordering = 'name'
+    elif Ordering == 'name':
         # написать функцию проверки имени типа как в Storage и вывести сюда как в переменной Change
-        PRODUCT['name'] = message.text.strip()
-        Check = Helpers.checkInStorage(Storage.storage, PRODUCT['name'])
+        Items['name'] = message.text.strip()
+        Check = Helpers.checkInStorage(Storage.storage, Items['name'])
         if Check == True: 
-            PRODUCT['name'] = message.text.strip()
+            Items['name'] = message.text.strip()
             bot.send_message(message.chat.id, 'Введи количество')
-            ODERING = 'count'
+            Ordering = 'count'
         else:
             bot.send_message(message.chat.id, 'Такого нет. Введи название еще раз')
-    elif ODERING == 'count':
-        PRODUCT['count'] = int(message.text.strip())
-        MyShoppingCart.addItems(copy.copy(PRODUCT))
-        Change = Storage.changeInStorage(Storage.storage, PRODUCT['name'], PRODUCT['count'])
+    elif Ordering == 'count':
+        Items['count'] = int(message.text.strip())
+        MyShoppingCart.addItems(copy.copy(Items))
+        Change = Storage.changeInStorage(Storage.storage, Items['name'], Items['count'])
         if Change == True:
-            answer = ('Ты заказал: ') + (PRODUCT['name']) + str(' в количестве ') + str((PRODUCT['count'])) + str(' шт')
+            answer = ('Ты заказал: ') + (Items['name']) + str(' в количестве ') + str((Items['count'])) + str(' шт')
             bot.send_message(message.chat.id, answer)
-            ODERING = False
+            Ordering = False
         else:
             answer = ('Неправильное количество')
             bot.send_message(message.chat.id, answer)
