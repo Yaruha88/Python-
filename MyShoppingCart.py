@@ -1,27 +1,31 @@
 from Helpers import printStock, changeInStorage, checkInStorage
 
-shoppingCart = []
+shopping_cart = []
 
-def getCart():
-    return shoppingCart
+def getCart(bot, message):
+    if len(shopping_cart) == 0:
+        bot.send_message(message.chat.id, 'Корзина пустая')
+    for i in shopping_cart:
+        answer = str('Название: ') + str(i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
+        bot.send_message(message.chat.id, answer) 
 
 def viewCart():
-    if len(shoppingCart) == 0:
+    if len(shopping_cart) == 0:
         print('Корзина пустая')
     else:
         print('В корзине: ')
-        printStock(shoppingCart)
+        printStock(shopping_cart)
     
     
 def deleteItem():
-    shoppingCart.clear()
+    shopping_cart.clear()
     print('Корзина очищена ')
 
 def addItems(product):
-    exist = checkInStorage(shoppingCart, product['name'])
+    exist = checkInStorage(shopping_cart, product['name'])
     if exist:
-        changeInStorage(shoppingCart, product['name'], product['count'])
+        changeInStorage(shopping_cart, product['name'], product['count'])
     else:
-        shoppingCart.append(product)
+        shopping_cart.append(product)
     print(product['name'] + ' добавлен в корзину.') 
 

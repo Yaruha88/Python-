@@ -4,8 +4,19 @@ import Helpers
 import Storage
 import MyShoppingCart
 import copy
-Ordering = ''
-Items = dict()
+
+current_step = ''
+user_choise = dict()
+VIEW_ITEM = '1. Посмотреть товар'
+VIEW_CART = '2. Посмотреть корзину'
+CLEAR_ITEM_FROM_CART = '3. Удалить товар из корзины'
+CREATE_ORDER = '4. Оформить заказ'
+
+user_cart = {message.chat.id: MyShoppingCart.shopping_cart}
+
+# def add_orders_by_user_id(user_id, new_item):
+
+# def get_user_cart(user_id):
 
 bot = telebot.TeleBot('5202629983:AAHB0cUjCLqJEz8rWs7I-_WHWGLkdYniAX8')
 @bot.message_handler(commands=['start'])
@@ -23,47 +34,43 @@ def start_message(message):
 
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
-    global Ordering
-    global Items
+    global current_step
+    global user_choise
 
-    if message.text.strip() == '1. Посмотреть товар':
-        for i in Storage.storage: 
-            answer = ('Название: ') + (i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
-            bot.send_message(message.chat.id, answer) 
-    elif message.text.strip() == '2. Посмотреть корзину':
-        cart = MyShoppingCart.getCart()
-        if len(cart) == 0:
-            bot.send_message(message.chat.id, 'Корзина пустая')
-        for i in cart:
-            answer = str('Название: ') + str(i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
-            bot.send_message(message.chat.id, answer) 
-    elif message.text.strip() == '3. Удалить товар из корзины':
-        MyShoppingCart.shoppingCart.clear()
+    if message.text.strip() == VIEW_ITEM:
+        Storage.viewStorage(bot, message)
+        
+    elif message.text.strip() == VIEW_CART:
+        MyShoppingCart.getCart(bot, message)
+        
+    elif message.text.strip() == CLEAR_ITEM_FROM_CART:
+        MyShoppingCart.shopping_cart.clear()
         bot.send_message(message.chat.id, 'Корзина очищена ')
-    elif message.text.strip() == '4. Оформить заказ':
-        for i in Storage.storage: 
-            answer = ('Название: ') + (i['name']) + str(' в количестве ') + str(i['count']) + str(' шт')
-            bot.send_message(message.chat.id, answer) 
+
+    elif message.text.strip() == CREATE_ORDER:
+        Storage.viewStorage(bot, message)
         bot.send_message(message.chat.id, 'Что выбираешь? ')
-        Ordering = 'name'
-    elif Ordering == 'name':
+        current_step = 'name'
+
+    elif current_step == 'name':
         # написать функцию проверки имени типа как в Storage и вывести сюда как в переменной Change
-        Items['name'] = message.text.strip()
-        Check = Helpers.checkInStorage(Storage.storage, Items['name'])
-        if Check == True: 
-            Items['name'] = message.text.strip()
+        user_choise['name'] = message.text.strip()
+        check_in_storage = Helpers.checkInStorage(Storage.storage, user_choise['name'])
+        if check_in_storage == True: 
+            user_choise['name'] = message.text.strip()
             bot.send_message(message.chat.id, 'Введи количество')
-            Ordering = 'count'
+            current_step = 'count'
         else:
             bot.send_message(message.chat.id, 'Такого нет. Введи название еще раз')
-    elif Ordering == 'count':
-        Items['count'] = int(message.text.strip())
-        MyShoppingCart.addItems(copy.copy(Items))
-        Change = Storage.changeInStorage(Storage.storage, Items['name'], Items['count'])
+            
+    elif current_step == 'count':
+        user_choise['count'] = int(message.text.strip())
+        MyShoppingCart.addItems(copy.copy(user_choise))
+        Change = Storage.changeInStorage(Storage.storage, user_choise['name'], user_choise['count'])
         if Change == True:
-            answer = ('Ты заказал: ') + (Items['name']) + str(' в количестве ') + str((Items['count'])) + str(' шт')
+            answer = ('Ты заказал: ') + (user_choise['name']) + str(' в количестве ') + str((user_choise['count'])) + str(' шт')
             bot.send_message(message.chat.id, answer)
-            Ordering = False
+            current_step = False
         else:
             answer = ('Неправильное количество')
             bot.send_message(message.chat.id, answer)
